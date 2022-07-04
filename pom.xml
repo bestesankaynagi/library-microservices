@@ -9,8 +9,19 @@
         <module>authentication</module>
         <module>book-service</module>
         <module>user-service</module>
+        <module>common</module>
     </modules>
-
+    <dependencies>
+        <dependency>
+         <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        </dependencies>
     <groupId>com.innova</groupId>
     <artifactId>library-microservices</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -29,5 +40,22 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--                <version>${project.parent.parent.version}</version>-->
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
