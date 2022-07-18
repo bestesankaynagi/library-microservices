@@ -48,10 +48,28 @@ public class UserDto {
     public void setID(Integer ID) {
         this.ID = ID;
     }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
+
+    public void setMatchingPassword(String matchingPassword) {
+        this.matchingPassword = matchingPassword;
+    }
 
     private Integer ID;
 
     private String lastName;
+
+    public String getPassword() {
+        return password;
+    }
+
+    private String password;
+    private String matchingPassword;
     private String name;
 
     private String email;

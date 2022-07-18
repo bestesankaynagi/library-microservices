@@ -5,7 +5,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+
 
     @Document
     @Data
@@ -43,6 +46,21 @@ import java.util.Date;
         public int getYear() {
             return year;
         }
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getMatchingPassword() {
+            return matchingPassword;
+        }
+
+        public void setMatchingPassword(String matchingPassword) {
+            this.matchingPassword = matchingPassword;
+        }
 
 
         @Id
@@ -58,5 +76,12 @@ import java.util.Date;
 
         @Field
         private int year;
+
+        @Field
+        private String password;
+
+        @Field
+        private String matchingPassword;
+
         
 }
