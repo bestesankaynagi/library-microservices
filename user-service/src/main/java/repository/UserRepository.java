@@ -1,8 +1,8 @@
 package repository;
 
-import org.apache.tomcat.jni.Library;
+import domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface UserRepository extends MongoRepository <Library,String>{
+public interface UserRepository extends MongoRepository<User, Integer> {
 }
 // MongoRepository database'e bağlanabilmesi için.
