@@ -1,9 +1,10 @@
 package tr.com.innova.internship.apigateway.controller;
 
-import tr.com.innova.internship.commonrest.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tr.com.innova.internship.apigateway.client.UserServiceApiClient;
+import tr.com.innova.internship.commonrest.CheckAccessToken;
+import tr.com.innova.internship.commonrest.dto.UserDto;
 
 
 @RestController
@@ -16,6 +17,7 @@ public class UserController {
     }
 
     @GetMapping
+    @CheckAccessToken
     public ResponseEntity<Object> getUserList() {
         return ResponseEntity.ok(
                 userServiceApiClient.getAllUsers()
