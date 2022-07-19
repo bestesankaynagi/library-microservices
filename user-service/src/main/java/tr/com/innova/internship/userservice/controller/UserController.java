@@ -1,28 +1,29 @@
-package controller;
-import domain.User;
-import dto.UserDto;
-import org.springframework.stereotype.Repository;
+package tr.com.innova.internship.userservice.controller;
+
+import tr.com.innova.internship.userservice.domain.User;
+import com.innova.internship.loggingsupport.rest.dto.UserDto;
 import org.springframework.web.bind.annotation.*;
-import service.UserService;
+import tr.com.innova.internship.userservice.service.UserService;
 
 import java.util.List;
 
 @RestController
-@Repository
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
-    public UserController(UserService userService){
-        this.userService=userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
+
     @GetMapping
     private List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping
-    private User findUser(@PathVariable int id){
+    @GetMapping("/{id}")
+    private User findUser(@PathVariable String id) {
         return userService.findById(id);
     }
 
@@ -30,8 +31,9 @@ public class UserController {
     public UserDto saveUser(@RequestBody UserDto userDto) {
         return userService.saveUser(userDto);
     }
-    @DeleteMapping
-    public void deleteUser(@PathVariable int id) {
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable String id) {
 
         userService.deleteById(id);
     }

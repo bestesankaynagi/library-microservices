@@ -1,10 +1,10 @@
-package service;
+package tr.com.innova.internship.userservice.service;
 
-import domain.User;
-import domain.UserMapper;
-import dto.UserDto;
+import tr.com.innova.internship.userservice.domain.User;
+import tr.com.innova.internship.userservice.domain.UserMapper;
+import com.innova.internship.loggingsupport.rest.dto.UserDto;
 import org.springframework.stereotype.Service;
-import repository.UserRepository;
+import tr.com.innova.internship.userservice.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+
     public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
@@ -31,7 +31,7 @@ public class UserService {
         return userMapper.toDto(userRepository.save(this.userMapper.toEntity(userDto)));
     }
     public UserDto updateUser(UserDto userDto) {
-        Optional<User> optionalUser = userRepository.findById(userDto.getID());
+        Optional<User> optionalUser = userRepository.findById(userDto.getId());
         if (optionalUser.isPresent()) {
 
             userDto.setName("..");
@@ -41,13 +41,13 @@ public class UserService {
         }
     }
 
-    public void deleteById(int userID) {
+    public void deleteById(String userID) {
         userRepository.deleteById(userID);
 
     }
 
-    public User findById(int userID){
-        Optional<User> userResponse =  userRepository.findById(userID);
-        return userResponse.orElseThrow(() -> new RuntimeException("No record found for given id: "+userID));
+    public User findById(String userID) {
+        Optional<User> userResponse = userRepository.findById(userID);
+        return userResponse.orElseThrow(() -> new RuntimeException("No record found for given id: " + userID));
     }
 }

@@ -1,6 +1,6 @@
 package tr.com.innova.internship.bookservice.service;
 
-import dto.BookDto;
+import com.innova.internship.loggingsupport.rest.dto.BookDto;
 import org.springframework.stereotype.Service;
 import tr.com.innova.internship.bookservice.domain.Book;
 import tr.com.innova.internship.bookservice.domain.BookMapper;
@@ -12,9 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookService {
-    //todo ObjectMapper ile Book objesinden BookDto dönüştürmek gerekiyor
     private final BookRepository bookRepository;
-
 
     private final BookMapper bookMapper;
 
@@ -24,15 +22,10 @@ public class BookService {
     }
 
     public List<BookDto> getAllBooks() {
-        //findAll bize bookDto return ediyor
         return bookRepository.findAll()
                 .stream()
                 .map(bookMapper::toDto)
                 .collect(Collectors.toList());
-
-//        return bookMapper.toDto(bookRepository.findAll());
-
-        // bookMapper.toDto() kullanarak List<BookDto> tipinde obje döndüreceğiz.
 
     }
 
@@ -43,7 +36,7 @@ public class BookService {
 
 
     public BookDto updateBook(BookDto bookDto) {
-        Optional<Book> optionalBook = bookRepository.findById(bookDto.getID());
+        Optional<Book> optionalBook = bookRepository.findById(bookDto.getId());
         if (optionalBook.isPresent()) {
 
             bookDto.setName("..");
@@ -54,23 +47,16 @@ public class BookService {
     }
 
 
-    public void deleteById(int bookID) {
+    public void deleteById(String bookID) {
         bookRepository.deleteById(bookID);
     }
 
-    public Book findById(int bookID){
-        Optional<Book> bookResponse =  bookRepository.findById(bookID);
-        return bookResponse.orElseThrow(() -> new RuntimeException("No record found for given id: "+bookID));
-//        Book book = null;
-//        if(bookResponse.isPresent()) {
-//            book = bookResponse.get();
-//        }else {
-//            throw new RuntimeException("No record found for given id: "+bookID);
-//        }
-//
-//        return book;
+    public Book findById(String bookID) {
+        Optional<Book> bookResponse = bookRepository.findById(bookID);
+        return bookResponse.orElseThrow(() -> new RuntimeException("No record found for given id: " + bookID));
+
     }
-    }
+}
 
 
 

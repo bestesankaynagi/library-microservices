@@ -1,4 +1,4 @@
-package tr.com.innova.internship.bookservice.domain;
+package tr.com.innova.internship.userservice.domain;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -6,29 +6,25 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
 
 @Document
 @Data
-public class Book {
+public class User {
     @Id
     private String id;
 
-    @Indexed(unique = true)
+    @Field
     private String name;
 
     @Field
-    private String author;
+    private String surname;
+
+    @Indexed(unique = true)
+    private String email;
 
     @Field
-    private int year;
+    private Integer year;
 
     @Field
-    private String publisher;
-
-    @Field("taken_by")
-    private String takenBy;
-
-    @Field("due_date")
-    private Date dueDate;
+    private String password;
 }
