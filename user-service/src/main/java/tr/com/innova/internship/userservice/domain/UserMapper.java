@@ -1,9 +1,10 @@
 package tr.com.innova.internship.userservice.domain;
 
-import com.innova.internship.loggingsupport.rest.mapper.Mapper;
-import com.innova.internship.loggingsupport.rest.dto.UserDto;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import tr.com.innova.internship.commonrest.dto.UserDto;
+import tr.com.innova.internship.commonrest.rest.mapper.Mapper;
 
 @Component
 public class UserMapper implements Mapper<User, UserDto> {

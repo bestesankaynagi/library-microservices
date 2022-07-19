@@ -1,9 +1,10 @@
 package tr.com.innova.internship.bookservice.domain;
 
-import com.innova.internship.loggingsupport.rest.mapper.Mapper;
-import com.innova.internship.loggingsupport.rest.dto.BookDto;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import tr.com.innova.internship.commonrest.dto.BookDto;
+import tr.com.innova.internship.commonrest.rest.mapper.Mapper;
 
 @Component
 public class BookMapper implements Mapper<Book, BookDto> {

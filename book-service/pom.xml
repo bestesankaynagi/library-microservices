@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>library-microservices</artifactId>
-        <groupId>com.innova</groupId>
+        <groupId>tr.com.innova.internship</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>tr.com.innova.internship</groupId>
     <artifactId>book-service</artifactId>
     <properties>
         <java.version>11</java.version>
+        <modelmapper.version>3.1.0</modelmapper.version>
     </properties>
     <dependencies>
         <dependency>
@@ -51,10 +51,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.innova.internship</groupId>
-            <artifactId>logging-support</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${modelmapper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tr.com.innova.internship</groupId>
+            <artifactId>common-rest</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

@@ -1,6 +1,6 @@
 package tr.com.innova.internship.apigateway.controller;
 
-import com.innova.internship.loggingsupport.rest.dto.BookDto;
+import tr.com.innova.internship.commonrest.dto.BookDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tr.com.innova.internship.apigateway.client.BookServiceApiClient;

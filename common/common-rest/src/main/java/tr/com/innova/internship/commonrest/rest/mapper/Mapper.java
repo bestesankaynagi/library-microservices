@@ -1,4 +1,4 @@
-package com.innova.internship.loggingsupport.rest.mapper;
+package tr.com.innova.internship.commonrest.rest.mapper;
 
 public interface Mapper<E, D> {
     E toEntity(D dto);

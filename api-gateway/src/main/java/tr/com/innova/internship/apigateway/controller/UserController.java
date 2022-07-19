@@ -1,6 +1,6 @@
 package tr.com.innova.internship.apigateway.controller;
 
-import com.innova.internship.loggingsupport.rest.dto.UserDto;
+import tr.com.innova.internship.commonrest.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tr.com.innova.internship.apigateway.client.UserServiceApiClient;

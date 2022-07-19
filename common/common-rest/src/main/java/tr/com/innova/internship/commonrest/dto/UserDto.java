@@ -1,4 +1,4 @@
-package com.innova.internship.loggingsupport.rest.dto;
+package tr.com.innova.internship.commonrest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

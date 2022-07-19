@@ -1,9 +1,8 @@
 package tr.com.innova.internship.bookservice.controller;
 
-import com.innova.internship.loggingsupport.rest.dto.BookDto;
 import org.springframework.web.bind.annotation.*;
-import tr.com.innova.internship.bookservice.domain.Book;
 import tr.com.innova.internship.bookservice.service.BookService;
+import tr.com.innova.internship.commonrest.dto.BookDto;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    private Book findBook(@PathVariable String id) {
+    private BookDto findBook(@PathVariable String id) {
         return bookService.findById(id);
     }
 

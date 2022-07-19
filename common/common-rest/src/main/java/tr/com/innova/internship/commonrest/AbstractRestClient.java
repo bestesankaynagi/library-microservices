@@ -1,4 +1,4 @@
-package com.innova.internship.loggingsupport.rest;
+package tr.com.innova.internship.commonrest;
 
 import org.springframework.web.reactive.function.client.WebClient;
 

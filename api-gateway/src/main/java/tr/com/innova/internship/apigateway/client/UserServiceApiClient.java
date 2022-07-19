@@ -1,11 +1,12 @@
 package tr.com.innova.internship.apigateway.client;
 
-import com.innova.internship.loggingsupport.rest.AbstractRestClient;
-import com.innova.internship.loggingsupport.rest.dto.UserDto;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Mono;
+import tr.com.innova.internship.commonrest.AbstractRestClient;
+import tr.com.innova.internship.commonrest.dto.UserDto;
 
 
 @Component

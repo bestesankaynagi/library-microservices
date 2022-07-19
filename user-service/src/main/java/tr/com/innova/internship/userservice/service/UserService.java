@@ -1,23 +1,25 @@
 package tr.com.innova.internship.userservice.service;
 
-import tr.com.innova.internship.userservice.domain.User;
-import tr.com.innova.internship.userservice.domain.UserMapper;
-import com.innova.internship.loggingsupport.rest.dto.UserDto;
 import org.springframework.stereotype.Service;
+import tr.com.innova.internship.commonrest.dto.LoginDto;
+import tr.com.innova.internship.commonrest.dto.UserDto;
+import tr.com.innova.internship.userservice.domain.UserMapper;
+import tr.com.innova.internship.userservice.helper.Sha256HashManager;
 import tr.com.innova.internship.userservice.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final Sha256HashManager sha256HashManager;
 
     public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.sha256HashManager = new Sha256HashManager();
     }
 
     public List<UserDto> getAllUsers() {
@@ -26,28 +28,25 @@ public class UserService {
                 .map(userMapper::toDto)
                 .collect(Collectors.toList());
     }
+
     public UserDto saveUser(UserDto userDto) {
-
+        userDto.setPassword(sha256HashManager.hash(userDto.getPassword()));
         return userMapper.toDto(userRepository.save(this.userMapper.toEntity(userDto)));
-    }
-    public UserDto updateUser(UserDto userDto) {
-        Optional<User> optionalUser = userRepository.findById(userDto.getId());
-        if (optionalUser.isPresent()) {
-
-            userDto.setName("..");
-            return userMapper.toDto(userRepository.save(this.userMapper.toEntity(userDto)));
-        } else {
-            throw new RuntimeException("No field found.");
-        }
     }
 
     public void deleteById(String userID) {
         userRepository.deleteById(userID);
-
     }
 
-    public User findById(String userID) {
-        Optional<User> userResponse = userRepository.findById(userID);
-        return userResponse.orElseThrow(() -> new RuntimeException("No record found for given id: " + userID));
+    public UserDto findById(String userID) {
+        return userRepository.findById(userID)
+                .map(userMapper::toDto)
+                .orElseThrow(() -> new RuntimeException("No record found for given id: " + userID));
+    }
+
+    public UserDto validateLoginAttempt(LoginDto loginDto) {
+        return userRepository.findByEmailAndPassword(loginDto.getEmail(), sha256HashManager.hash(loginDto.getPassword()))
+                .map(userMapper::toDto)
+                .orElseThrow(() -> new RuntimeException("Not a valid login attempt!"));
     }
 }
