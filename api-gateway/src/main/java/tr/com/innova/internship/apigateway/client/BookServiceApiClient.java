@@ -1,9 +1,12 @@
 package tr.com.innova.internship.apigateway.client;
 
-import com.innova.internship.loggingsupport.rest.AbstractRestClient;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Mono;
+import tr.com.innova.internship.commonrest.AbstractRestClient;
+import tr.com.innova.internship.commonrest.dto.BookDto;
 
 @Component
 public class BookServiceApiClient extends AbstractRestClient {
@@ -11,8 +14,30 @@ public class BookServiceApiClient extends AbstractRestClient {
     private String bookServiceUrl;
 
     public Mono<Object> getBookList() {
-        return createWebClient(String.format("%s/book", bookServiceUrl))
+        return createWebClient(String.format("%s/books", bookServiceUrl))
                 .get()
+                .retrieve()
+                .bodyToMono(Object.class);
+    }
+
+    public Mono<Object> getBook(String id) {
+        return createWebClient(String.format("%s/books/%s", bookServiceUrl, id))
+                .get()
+                .retrieve()
+                .bodyToMono(Object.class);
+    }
+
+    public Mono<Object> saveBook(BookDto bookDto) {
+        return createWebClient(String.format("%s/books", bookServiceUrl))
+                .post()
+                .body(BodyInserters.fromValue(bookDto))
+                .retrieve()
+                .bodyToMono(Object.class);
+    }
+
+    public Mono<Object> deleteBook(String id) {
+        return createWebClient(String.format("%s/books/%s", bookServiceUrl, id))
+                .delete()
                 .retrieve()
                 .bodyToMono(Object.class);
     }

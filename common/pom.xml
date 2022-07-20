@@ -4,15 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>library-microservices</artifactId>
-        <groupId>com.innova</groupId>
+        <groupId>tr.com.innova.internship</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modules>
         <module>logging-support</module>
+        <module>encryption</module>
+        <module>jwt-support</module>
+        <module>common-rest</module>
     </modules>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>common</artifactId>
+    <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
