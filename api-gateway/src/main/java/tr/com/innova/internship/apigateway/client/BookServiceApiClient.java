@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Mono;
 import tr.com.innova.internship.commonrest.AbstractRestClient;
 import tr.com.innova.internship.commonrest.dto.BookDto;
+import tr.com.innova.internship.commonrest.dto.RentDto;
 
 @Component
 public class BookServiceApiClient extends AbstractRestClient {
@@ -41,4 +42,13 @@ public class BookServiceApiClient extends AbstractRestClient {
                 .retrieve()
                 .bodyToMono(Object.class);
     }
+
+    public Mono<BookDto> rentBook(RentDto rentDto) {
+        return createWebClient(String.format("%s/books/rent", bookServiceUrl))
+                .post()
+                .body(BodyInserters.fromValue(rentDto))
+                .retrieve()
+                .bodyToMono(BookDto.class);
+    }
+
 }

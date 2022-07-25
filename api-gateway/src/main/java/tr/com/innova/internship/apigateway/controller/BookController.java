@@ -4,6 +4,7 @@ import tr.com.innova.internship.commonrest.dto.BookDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tr.com.innova.internship.apigateway.client.BookServiceApiClient;
+import tr.com.innova.internship.commonrest.dto.RentDto;
 
 @RestController
 @RequestMapping("/books")
@@ -47,5 +48,14 @@ public class BookController {
                         .block()
         );
     }
+
+    @PostMapping("/rent")
+    public ResponseEntity<BookDto> rentBook(@RequestBody RentDto rentDto) {
+        return ResponseEntity.ok(
+                bookServiceApiClient.rentBook(rentDto)
+                        .block()
+        );
+    }
+
 }
 

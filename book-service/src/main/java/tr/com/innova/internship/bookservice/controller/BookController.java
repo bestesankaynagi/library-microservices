@@ -3,6 +3,7 @@ package tr.com.innova.internship.bookservice.controller;
 import org.springframework.web.bind.annotation.*;
 import tr.com.innova.internship.bookservice.service.BookService;
 import tr.com.innova.internship.commonrest.dto.BookDto;
+import tr.com.innova.internship.commonrest.dto.RentDto;
 
 import java.util.List;
 
@@ -37,6 +38,12 @@ public class BookController {
     public void deleteBook(@PathVariable String id) {
         bookService.deleteById(id);
     }
+
+    @PostMapping("/rent")
+    public BookDto rentBook(@RequestBody RentDto rentDto) {
+        return bookService.rentBook(rentDto);
+    }
+
 
 }
 
