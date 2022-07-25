@@ -1,8 +1,11 @@
-package tr.com.innova.internship.commonrest.interceptor;
+package tr.com.innova.internship.apigateway.interceptor;
 
+import com.innova.internship.jwtsupport.JwtConstants;
+import com.innova.internship.jwtsupport.JwtUtils;
 import com.innova.internship.jwtsupport.TokenVerifier;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import tr.com.innova.internship.apigateway.service.TokenRevocationService;
 import tr.com.innova.internship.commonrest.CheckAccessToken;
 import tr.com.innova.internship.commonrest.NotAuthenticatedException;
 
@@ -16,9 +19,11 @@ import static tr.com.innova.internship.commonrest.utils.TokenUtils.extractTokenF
 
 public class AccessTokenHandlerInterceptor implements HandlerInterceptor {
     private final TokenVerifier tokenVerifier;
+    private final TokenRevocationService tokenRevocationService;
 
-    public AccessTokenHandlerInterceptor(TokenVerifier tokenVerifier) {
+    public AccessTokenHandlerInterceptor(TokenVerifier tokenVerifier, TokenRevocationService tokenRevocationService) {
         this.tokenVerifier = tokenVerifier;
+        this.tokenRevocationService = tokenRevocationService;
     }
 
     @Override
@@ -40,6 +45,8 @@ public class AccessTokenHandlerInterceptor implements HandlerInterceptor {
 
         this.verify(token, checkAccessToken.discardExpiry());
 
+        String refreshTokenId = JwtUtils.decode(token).getClaim(JwtConstants.REFRESH_TOKEN_ID).asString();
+        if(tokenRevocationService.isRevoked(refreshTokenId)) throw new TokenRevokedException();
 
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }

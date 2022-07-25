@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import tr.com.innova.internship.apigateway.interceptor.TokenRevokedException;
 import tr.com.innova.internship.commonrest.NotAuthenticatedException;
 
 
@@ -20,7 +21,8 @@ public class ResourceErrorController {
 			AlgorithmMismatchException.class,
 			SignatureVerificationException.class,
 			TokenExpiredException.class,
-			InvalidClaimException.class
+			InvalidClaimException.class,
+			TokenRevokedException.class
 	})
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	ResponseEntity<String> onNotAuthenticatedException(Exception ex) {

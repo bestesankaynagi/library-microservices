@@ -1,9 +1,10 @@
-package tr.com.innova.internship.commonrest.config;
+package tr.com.innova.internship.apigateway.config;
 
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import tr.com.innova.internship.commonrest.interceptor.AccessTokenHandlerInterceptor;
+import tr.com.innova.internship.apigateway.interceptor.AccessTokenHandlerInterceptor;
+
 
 public class WebConfiguration implements WebMvcConfigurer {
 
